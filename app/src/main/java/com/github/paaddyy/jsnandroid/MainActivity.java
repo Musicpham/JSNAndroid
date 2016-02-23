@@ -21,8 +21,6 @@ import com.parrot.arsdk.ARSDK;
 
 public class MainActivity extends Activity {
 
-	//ARSDK.loadSDKLibs();
-
 	private DatabaseHandler mDBHandler;
 	private Button _search	,_reserve,_unreserve;
 	private EditText _field;
@@ -37,6 +35,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		ARSDK.loadSDKLibs();
 
 		mDBHandler = new DatabaseHandler(this);
 		_search = (Button) findViewById(R.id.button1);
