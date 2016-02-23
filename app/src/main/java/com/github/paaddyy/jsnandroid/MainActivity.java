@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 			}
 
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if (_field.getText().toString().isEmpty()) {
+				if (_field.getText().toString().isEmpty() || Integer.parseInt(_field.getText().toString()) > 9) {
 					return;
 				}
 				getStatusOfSpace(Integer.parseInt(_field.getText().toString()));
