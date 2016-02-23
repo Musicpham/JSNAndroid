@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="libARDataTransfer-3.8.3">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.parrot/libARDataTransfer/3.8.3/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.parrot/libARDataTransfer/3.8.3/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.parrot/libARDataTransfer/3.8.3/8292296d3e7d308a6fa680e35deac940175993f5/libARDataTransfer-3.8.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

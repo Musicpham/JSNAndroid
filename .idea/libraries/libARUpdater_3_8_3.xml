@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="libARUpdater-3.8.3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.parrot/libARUpdater/3.8.3/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.parrot/libARUpdater/3.8.3/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.parrot/libARUpdater/3.8.3/3ffda82d7e59d21fcd0fc2d8d47cdc645530af06/libARUpdater-3.8.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

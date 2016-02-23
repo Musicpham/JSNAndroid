@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="libARController-3.8.3">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.parrot/libARController/3.8.3/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.parrot/libARController/3.8.3/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.parrot/libARController/3.8.3/a737e52036eb9475185b3bc4967be5d6808e4885/libARController-3.8.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
