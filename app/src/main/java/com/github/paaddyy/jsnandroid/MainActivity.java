@@ -42,10 +42,7 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 	private Button _search	,_reserve,_unreserve;
 	private EditText _field;
 	private TextView _status;
-	/**
-	 * ATTENTION: This was auto-generated to implement the App Indexing API.
-	 * See https://g.co/AppIndexing/AndroidStudio for more information.
-	 */
+
 	private GoogleApiClient client;
 
 	private static final String TAG = MainActivity.class.getSimpleName();
@@ -149,8 +146,6 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 			}
 		});
 
-		// ATTENTION: This was auto-generated to implement the App Indexing API.
-		// See https://g.co/AppIndexing/AndroidStudio for more information.
 		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 	}
 
