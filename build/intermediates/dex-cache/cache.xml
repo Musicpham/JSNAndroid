@@ -1,3 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARSAL\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3b18e25fbfc61f7124d6f756f7d186a28833f12c">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARSAL-3.8.3_c5370fb98d5913e3ce6b3dee5f0ae208c5a09de1.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARStream2\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="dbf058e81e107f46ebc58068b9808c160f00c39f">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARStream2-3.8.3_fa9176449a5a465c413768638e559ae8dc128464.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1_2c04f329ee15e283d2878f832bd51d481a3e49ca.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARUpdater\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fbf2fbeb9a110686abb18e3853f1e747e6b62012">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARUpdater-3.8.3_1e8727cba222202c2b10914dc4fba905602b41ff.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.1.0_c201ecedf67c511d288ec9a5199e9d155924b0c9.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARController\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ea26fd1bcf30dfb9575aeed0384204aeda9485e8">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARController-3.8.3_270a782740416a3167665508a4a388b668fac972.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\arsdk\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="641a65fce2b5291e31aeb2a085a827ae4de9d1be">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-arsdk-3.8.3_ff2d26f55f96cb6204e52f5387823d83f420cebf.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARMedia\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="50ab33ffcf5b13f0139b4e870c1ba04e6de5a4cc">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARMedia-3.8.3_a752d34aeac471fe94573bc9891a21c547918331.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\.gradle\caches\modules-2\files-2.1\org.apache.sanselan\sanselan\0.97-incubator\8396778b076a2eaf62024b64f6d924e4e0095fca\sanselan-0.97-incubator.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8396778b076a2eaf62024b64f6d924e4e0095fca">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\sanselan-0.97-incubator_d1bdc732a696f77e76e96be959cb00793f580fa5.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\.gradle\caches\modules-2\files-2.1\javax.jmdns\jmdns\3.4.1\7ba2dcf7effb5ca9b00736b2a066fff3dd01d432\jmdns-3.4.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="7ba2dcf7effb5ca9b00736b2a066fff3dd01d432">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\jmdns-3.4.1_77b48c5644fdd6d503ab97a57320c3a0d8bebded.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.1.0_73b00cd11934b83b5448cfe9b3d2cda29c0d0e8a.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1_c98c97bcf99dba0e35e8609b8fb01639ad1c2c76.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARNetworkAL\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f6887e1de8146f194f81bb2e1b6b2a328380adbd">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARNetworkAL-3.8.3_e596264e482577bbe55f4cfbd7b2283c55e00b16.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARCommands\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6571d72e1465926c532c59644b85d30e265a13b5">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARCommands-3.8.3_1bcdb4d28266a945fe467514e4534065cc4c32ab.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.1_5bd3acbaee6e58e387d85c25a6ba980795d014e2.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARDiscovery\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c0c4be91d75353369dd98471694b87f3c0c2cbb8">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARDiscovery-3.8.3_fa1e617fe22cadc127061f9135d4394192523837.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARUtils\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="2586315fce006f5ecb79e3daebaf75e80704581b">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARUtils-3.8.3_c24fdff7b331eb16121551534cacdbd5bbbcdb39.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARNetwork\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="98871ebd413808da98e818a1e3fecd7bccd1eb4a">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARNetwork-3.8.3_ac9a4c03a940ecbb528d4696368d5c3dd3f3f059.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARDataTransfer\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5fdfbe94903aa9120ca4cdc3699cd2bfc601d6e1">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARDataTransfer-3.8.3_27c3184d1fba19b647269596c7ea57a0305ea8b3.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARStream\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3cc11def05cef01a52c45b5cbc0b105646406436">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARStream-3.8.3_921f2497d0686a82755d198282eca5fd4f1eb666.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARMavlink\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f041c8dcec7819a6268da2b0fc4a5d4507c8b423">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARMavlink-3.8.3_940fdb00f4b2e0e2af9fed962a6d5787511b761f.jar" />
+    </item>
+    <item
+        jar="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="C:\Users\_paaddy_\AndroidStudioProjects\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-21.0.3_33e3dc3b4373c1cf9fba495cf1c36c25ea092606.jar" />
+    </item>
+
+</items>

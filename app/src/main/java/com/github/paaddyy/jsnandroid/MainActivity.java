@@ -1,15 +1,24 @@
 package com.github.paaddyy.jsnandroid;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +26,17 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.parrot.arsdk.ARSDK;
+import com.parrot.arsdk.ardiscovery.ARDISCOVERY_PRODUCT_ENUM;
+import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
+import com.parrot.arsdk.ardiscovery.ARDiscoveryService;
+import com.parrot.arsdk.ardiscovery.receivers.ARDiscoveryServicesDevicesListUpdatedReceiver;
+import com.parrot.arsdk.ardiscovery.receivers.ARDiscoveryServicesDevicesListUpdatedReceiverDelegate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements ARDiscoveryServicesDevicesListUpdatedReceiverDelegate {
 
 	private DatabaseHandler mDBHandler;
 	private Button _search	,_reserve,_unreserve;
@@ -31,12 +48,57 @@ public class MainActivity extends Activity {
 	 */
 	private GoogleApiClient client;
 
+	private static final String TAG = MainActivity.class.getSimpleName();
+
+	private ARDiscoveryService ardiscoveryService;
+	private boolean ardiscoveryServiceBound = false;
+	private ServiceConnection ardiscoveryServiceConnection;
+	public IBinder discoveryServiceBinder;
+
+	private ListView listView ;
+	private List<ARDiscoveryDeviceService> deviceList;
+	private String[] deviceNameList;
+
+	private BroadcastReceiver ardiscoveryServicesDevicesListUpdatedReceiver;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		ARSDK.loadSDKLibs();
+
+		//JUMPING SUMO
+		initBroadcastReceiver();
+		initServiceConnection();
+
+		listView = (ListView) findViewById(R.id.list);
+
+		deviceList = new ArrayList<ARDiscoveryDeviceService>();
+		deviceNameList = new String[]{};
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, deviceNameList);
+
+
+		// Assign adapter to ListView
+		listView.setAdapter(adapter);
+
+		//ListView Item Click Listener
+		/*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+				ARDiscoveryDeviceService service = deviceList.get(position);
+
+				Intent intent = new Intent(MainActivity.this, PilotingActivity.class);
+				intent.putExtra(PilotingActivity.EXTRA_DEVICE_SERVICE, service);
+
+
+				startActivity(intent);
+			}
+
+		});*/
 
 		mDBHandler = new DatabaseHandler(this);
 		_search = (Button) findViewById(R.id.button1);
@@ -187,5 +249,71 @@ public class MainActivity extends Activity {
 		);
 		AppIndex.AppIndexApi.end(client, viewAction);
 		client.disconnect();
+	}
+
+	private void initBroadcastReceiver()
+	{
+		ardiscoveryServicesDevicesListUpdatedReceiver = new ARDiscoveryServicesDevicesListUpdatedReceiver(this);
+	}
+
+	@Override
+	public void onServicesDevicesListUpdated() {
+		Log.d(TAG, "onServicesDevicesListUpdated ...");
+
+		List<ARDiscoveryDeviceService> list;
+
+		if (ardiscoveryService != null)
+		{
+			list = ardiscoveryService.getDeviceServicesArray();
+
+			deviceList = new ArrayList<ARDiscoveryDeviceService>();
+			List<String> deviceNames = new ArrayList<String>();
+
+			if(list != null)
+			{
+				for (ARDiscoveryDeviceService service : list)
+				{
+					Log.e(TAG, "service :  "+ service + " name = " + service.getName());
+					ARDISCOVERY_PRODUCT_ENUM product = ARDiscoveryService.getProductFromProductID(service.getProductID());
+					Log.e(TAG, "product :  "+ product);
+					// only display Jumping Sumo
+					if (ARDISCOVERY_PRODUCT_ENUM.ARDISCOVERY_PRODUCT_JS.equals(product))
+					{
+						deviceList.add(service);
+						deviceNames.add(service.getName());
+					}
+				}
+			}
+
+			deviceNameList = deviceNames.toArray(new String[deviceNames.size()]);
+
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, deviceNameList);
+
+			// Assign adapter to ListView
+			listView.setAdapter(adapter);
+		}
+	}
+
+	private void initServiceConnection()
+	{
+		ardiscoveryServiceConnection = new ServiceConnection()
+		{
+			@Override
+			public void onServiceConnected(ComponentName name, IBinder service)
+			{
+				discoveryServiceBinder = service;
+				ardiscoveryService = ((ARDiscoveryService.LocalBinder) service).getService();
+				ardiscoveryServiceBound = true;
+
+				ardiscoveryService.start();
+			}
+
+			@Override
+			public void onServiceDisconnected(ComponentName name)
+			{
+				ardiscoveryService = null;
+				ardiscoveryServiceBound = false;
+			}
+		};
 	}
 }
