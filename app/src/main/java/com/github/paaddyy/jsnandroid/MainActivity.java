@@ -32,11 +32,21 @@ import com.parrot.arsdk.ardiscovery.ARDiscoveryService;
 import com.parrot.arsdk.ardiscovery.receivers.ARDiscoveryServicesDevicesListUpdatedReceiver;
 import com.parrot.arsdk.ardiscovery.receivers.ARDiscoveryServicesDevicesListUpdatedReceiverDelegate;
 
+import org.opencv.android.OpenCVLoader;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends Activity implements ARDiscoveryServicesDevicesListUpdatedReceiverDelegate {
+
+	static {
+		if(!OpenCVLoader.initDebug()){
+			Log.i("opencv", "opencv initialization failed!");
+		} else{
+			Log.i("opencv", "opencv initialization successul!");
+		}
+	}
 
 	private DatabaseHandler mDBHandler;
 	private Button _search	,_reserve,_unreserve;

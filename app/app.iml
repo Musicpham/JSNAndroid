@@ -120,5 +120,6 @@
     <orderEntry type="library" exported="" name="libARNetwork-3.8.3" level="project" />
     <orderEntry type="library" exported="" name="libARMedia-3.8.3" level="project" />
     <orderEntry type="library" exported="" name="libARDiscovery-3.8.3" level="project" />
+    <orderEntry type="module" module-name="opencv" exported="" />
   </component>
 </module>
