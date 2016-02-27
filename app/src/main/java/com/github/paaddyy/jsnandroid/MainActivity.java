@@ -3,11 +3,14 @@ package com.github.paaddyy.jsnandroid;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -41,15 +44,15 @@ import java.util.List;
 public class MainActivity extends Activity implements ARDiscoveryServicesDevicesListUpdatedReceiverDelegate {
 
 	static {
-		if(!OpenCVLoader.initDebug()){
+		if (!OpenCVLoader.initDebug()) {
 			Log.i("opencv", "opencv initialization failed!");
-		} else{
+		} else {
 			Log.i("opencv", "opencv initialization successul!");
 		}
 	}
 
 	private DatabaseHandler mDBHandler;
-	private Button _search	,_reserve,_unreserve;
+	private Button _search, _reserve, _unreserve;
 	private EditText _field;
 	private TextView _status;
 
@@ -62,11 +65,15 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 	private ServiceConnection ardiscoveryServiceConnection;
 	public IBinder discoveryServiceBinder;
 
-	private ListView listView ;
+	private ListView listView;
 	private List<ARDiscoveryDeviceService> deviceList;
 	private String[] deviceNameList;
 
 	private BroadcastReceiver ardiscoveryServicesDevicesListUpdatedReceiver;
+
+
+	private ARDiscoveryService mArdiscoveryService;
+	private ServiceConnection mArdiscoveryServiceConnection;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +83,8 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 		ARSDK.loadSDKLibs();
 
 		//JUMPING SUMO
-		initBroadcastReceiver();
-		initServiceConnection();
+		initDiscoveryService();
+		registerReceivers();
 
 		listView = (ListView) findViewById(R.id.list);
 
@@ -91,21 +98,24 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 		listView.setAdapter(adapter);
 
 		//ListView Item Click Listener
-		/*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 				ARDiscoveryDeviceService service = deviceList.get(position);
 
-				Intent intent = new Intent(MainActivity.this, PilotingActivity.class);
-				intent.putExtra(PilotingActivity.EXTRA_DEVICE_SERVICE, service);
+				Intent intent = new Intent(getApplicationContext(), SumoParrot.class); //war vorher MainActivity.this!
+				intent.putExtra(SumoParrot.EXTRA_DEVICE_SERVICE, service);
 
 
 				startActivity(intent);
+
+				Toast toast = Toast.makeText(getApplicationContext(), "Tapped", Toast.LENGTH_LONG);
+				toast.show();
 			}
 
-		});*/
+		});
 
 		mDBHandler = new DatabaseHandler(this);
 		_search = (Button) findViewById(R.id.button1);
@@ -256,27 +266,70 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 		client.disconnect();
 	}
 
-	private void initBroadcastReceiver()
+	private void initDiscoveryService()
 	{
-		ardiscoveryServicesDevicesListUpdatedReceiver = new ARDiscoveryServicesDevicesListUpdatedReceiver(this);
+		// create the service connection
+		if (mArdiscoveryServiceConnection == null)
+		{
+			mArdiscoveryServiceConnection = new ServiceConnection()
+			{
+				@Override
+				public void onServiceConnected(ComponentName name, IBinder service)
+				{
+					mArdiscoveryService = ((ARDiscoveryService.LocalBinder) service).getService();
+
+					startDiscovery();
+				}
+
+				@Override
+				public void onServiceDisconnected(ComponentName name)
+				{
+					mArdiscoveryService = null;
+				}
+			};
+		}
+
+		if (mArdiscoveryService == null)
+		{
+			// if the discovery service doesn't exists, bind to it
+			Intent i = new Intent(getApplicationContext(), ARDiscoveryService.class);
+			getApplicationContext().bindService(i, mArdiscoveryServiceConnection, Context.BIND_AUTO_CREATE);
+		}
+		else
+		{
+			// if the discovery service already exists, start discovery
+			startDiscovery();
+		}
+	}
+
+	private void startDiscovery()
+	{
+		if (mArdiscoveryService != null)
+		{
+			mArdiscoveryService.start();
+		}
+	}
+
+	private void registerReceivers()
+	{
+		ARDiscoveryServicesDevicesListUpdatedReceiver mArdiscoveryServicesDevicesListUpdatedReceiver = new ARDiscoveryServicesDevicesListUpdatedReceiver(this);
+		LocalBroadcastManager localBroadcastMgr = LocalBroadcastManager.getInstance(getApplicationContext());
+		localBroadcastMgr.registerReceiver(mArdiscoveryServicesDevicesListUpdatedReceiver, new IntentFilter(ARDiscoveryService.kARDiscoveryServiceNotificationServicesDevicesListUpdated));
 	}
 
 	@Override
 	public void onServicesDevicesListUpdated() {
 		Log.d(TAG, "onServicesDevicesListUpdated ...");
 
-		List<ARDiscoveryDeviceService> list;
-
-		if (ardiscoveryService != null)
+		if (mArdiscoveryService != null)
 		{
-			list = ardiscoveryService.getDeviceServicesArray();
+			List<ARDiscoveryDeviceService> deviceList = mArdiscoveryService.getDeviceServicesArray();
 
-			deviceList = new ArrayList<ARDiscoveryDeviceService>();
 			List<String> deviceNames = new ArrayList<String>();
 
-			if(list != null)
+			if(deviceList != null)
 			{
-				for (ARDiscoveryDeviceService service : list)
+				for (ARDiscoveryDeviceService service : deviceList)
 				{
 					Log.e(TAG, "service :  "+ service + " name = " + service.getName());
 					ARDISCOVERY_PRODUCT_ENUM product = ARDiscoveryService.getProductFromProductID(service.getProductID());
@@ -297,28 +350,5 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 			// Assign adapter to ListView
 			listView.setAdapter(adapter);
 		}
-	}
-
-	private void initServiceConnection()
-	{
-		ardiscoveryServiceConnection = new ServiceConnection()
-		{
-			@Override
-			public void onServiceConnected(ComponentName name, IBinder service)
-			{
-				discoveryServiceBinder = service;
-				ardiscoveryService = ((ARDiscoveryService.LocalBinder) service).getService();
-				ardiscoveryServiceBound = true;
-
-				ardiscoveryService.start();
-			}
-
-			@Override
-			public void onServiceDisconnected(ComponentName name)
-			{
-				ardiscoveryService = null;
-				ardiscoveryServiceBound = false;
-			}
-		};
 	}
 }
