@@ -103,16 +103,21 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				ARDiscoveryDeviceService service = deviceList.get(position);
+				Log.d("deviceList", deviceList.toString());
 
-				Intent intent = new Intent(getApplicationContext(), SumoParrot.class); //war vorher MainActivity.this!
+				ARDiscoveryDeviceService service = deviceList.get(position); //hier hängt er sich auf!
+
+				Toast toast1 = Toast.makeText(getApplicationContext(), "After Service", Toast.LENGTH_LONG);
+				toast1.show();
+
+				Intent intent = new Intent(MainActivity.this, SumoParrot.class);
 				intent.putExtra(SumoParrot.EXTRA_DEVICE_SERVICE, service);
 
+				Toast toast2 = Toast.makeText(getApplicationContext(), "After intent", Toast.LENGTH_LONG);
+				toast2.show();
 
 				startActivity(intent);
 
-				Toast toast = Toast.makeText(getApplicationContext(), "Tapped", Toast.LENGTH_LONG);
-				toast.show();
 			}
 
 		});
@@ -323,7 +328,7 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 
 		if (mArdiscoveryService != null)
 		{
-			List<ARDiscoveryDeviceService> deviceList = mArdiscoveryService.getDeviceServicesArray();
+			deviceList = mArdiscoveryService.getDeviceServicesArray();
 
 			List<String> deviceNames = new ArrayList<String>();
 
