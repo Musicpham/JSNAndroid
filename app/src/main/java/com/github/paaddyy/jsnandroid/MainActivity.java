@@ -17,11 +17,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,128 +54,58 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 		}
 	}
 
-	private DatabaseHandler mDBHandler;
-	private Button _search, _reserve, _unreserve;
-	private EditText _field;
-	private TextView _status;
-
-	private GoogleApiClient client;
-
-	private static final String TAG = MainActivity.class.getSimpleName();
-
-	private ARDiscoveryService ardiscoveryService;
-	private boolean ardiscoveryServiceBound = false;
-	private ServiceConnection ardiscoveryServiceConnection;
-	public IBinder discoveryServiceBinder;
-
-	private ListView listView;
-	private List<ARDiscoveryDeviceService> deviceList;
-	private String[] deviceNameList;
-
-	private BroadcastReceiver ardiscoveryServicesDevicesListUpdatedReceiver;
-
+	private TextView status;
+	private Button connect;
+	private ProgressBar loadingSpinner;
 
 	private ARDiscoveryService mArdiscoveryService;
 	private ServiceConnection mArdiscoveryServiceConnection;
+	private List<ARDiscoveryDeviceService> deviceList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//Remove title bar
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//Remove notification bar
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//Set Layout
 		setContentView(R.layout.activity_main);
-
+		//Load ARSDK-Libs
 		ARSDK.loadSDKLibs();
 
-		//JUMPING SUMO
+		//GET GUI-ELEMENTS
+		status = (TextView)findViewById(R.id.status);
+		connect = (Button)findViewById(R.id.connect);
+		loadingSpinner = (ProgressBar) findViewById(R.id.loadingSpinner);
+
+		//INITIALIZE GUI
+		connect.setEnabled(false);
+		status.setText("Warte auf Verbindung...");
+		loadingSpinner.setVisibility(View.VISIBLE);
+
+		//INIT SUMO DISCOVERY SERVICE AND REGISTER RECEIVERS
 		initDiscoveryService();
 		registerReceivers();
 
-		listView = (ListView) findViewById(R.id.list);
-
-		deviceList = new ArrayList<ARDiscoveryDeviceService>();
-		deviceNameList = new String[]{};
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, deviceNameList);
-
-
-		// Assign adapter to ListView
-		listView.setAdapter(adapter);
-
-		//ListView Item Click Listener
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		connect.setOnClickListener(new View.OnClickListener(){
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onClick(View v) {
+				ARDiscoveryDeviceService service = deviceList.get(0);
 
-				Log.d("deviceList", deviceList.toString());
+				Intent intent = new Intent(MainActivity.this, Options.class);
 
-				ARDiscoveryDeviceService service = deviceList.get(position); //hier hängt er sich auf!
-
-				Toast toast1 = Toast.makeText(getApplicationContext(), "After Service", Toast.LENGTH_LONG);
-				toast1.show();
-
+				/*
 				Intent intent = new Intent(MainActivity.this, SumoParrot.class);
-				intent.putExtra(SumoParrot.EXTRA_DEVICE_SERVICE, service);
-
-				Toast toast2 = Toast.makeText(getApplicationContext(), "After intent", Toast.LENGTH_LONG);
-				toast2.show();
+				intent.putExtra(SumoParrot.EXTRA_DEVICE_SERVICE, service); //über Session regeln*/
 
 				startActivity(intent);
-
-			}
-
-		});
-
-		mDBHandler = new DatabaseHandler(this);
-		_search = (Button) findViewById(R.id.button1);
-		_reserve = (Button) findViewById(R.id.button2);
-		_unreserve = (Button) findViewById(R.id.button3);
-
-		_field = (EditText) findViewById(R.id.editText1);
-		_status = (TextView) findViewById(R.id.textView1);
-
-		_search.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				searchSpace();
 			}
 		});
-
-		_reserve.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				_un_reserveSpace(Integer.parseInt(_field.getText().toString()));
-
-			}
-		});
-
-		_unreserve.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				_un_reserveSpace(Integer.parseInt(_field.getText().toString()));
-			}
-		});
-
-		_field.addTextChangedListener(new TextWatcher() {
-
-			public void afterTextChanged(Editable s) {
-			}
-
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if (_field.getText().toString().isEmpty() || Integer.parseInt(_field.getText().toString()) > 9) {
-					return;
-				}
-				getStatusOfSpace(Integer.parseInt(_field.getText().toString()));
-			}
-		});
-
-		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -191,84 +124,6 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void searchSpace() {
-		boolean success = false;
-		int space = 0;
-		space = mDBHandler.getFreeSpace();
-
-		if (space != 0) {
-			success = true;
-		}
-
-		if (success) {
-			Toast.makeText(getApplicationContext(), "FOUND AVAILABLE SPACE: " + space, Toast.LENGTH_LONG).show();
-		} else {
-			Toast.makeText(getApplicationContext(), "NO AVAILABLE SPACE FOUND", Toast.LENGTH_LONG).show();
-		}
-	}
-
-	private void changeStatusofSpace(String space) {
-		int new_value = mDBHandler.changeStatusOfSpace(space);
-
-		updateStatusGUI(new_value);
-	}
-
-	private void updateStatusGUI(int flag) {
-		if (flag == 1) {
-			_status.setText("FREI!");
-		} else if (flag == 0) {
-			_status.setText("BELEGT!");
-		}
-	}
-
-	private void _un_reserveSpace(int space) {
-		changeStatusofSpace(String.valueOf(space));
-	}
-
-	private void getStatusOfSpace(int space) {
-		updateStatusGUI(mDBHandler.getStatusOfSpace(String.valueOf(space)));
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-
-		// ATTENTION: This was auto-generated to implement the App Indexing API.
-		// See https://g.co/AppIndexing/AndroidStudio for more information.
-		client.connect();
-		Action viewAction = Action.newAction(
-				Action.TYPE_VIEW, // TODO: choose an action type.
-				"Main Page", // TODO: Define a title for the content shown.
-				// TODO: If you have web page content that matches this app activity's content,
-				// make sure this auto-generated web page URL is correct.
-				// Otherwise, set the URL to null.
-				Uri.parse("http://host/path"),
-				// TODO: Make sure this auto-generated app deep link URI is correct.
-				Uri.parse("android-app://com.github.paaddyy.jsnandroid/http/host/path")
-		);
-		AppIndex.AppIndexApi.start(client, viewAction);
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-
-		// ATTENTION: This was auto-generated to implement the App Indexing API.
-		// See https://g.co/AppIndexing/AndroidStudio for more information.
-		Action viewAction = Action.newAction(
-				Action.TYPE_VIEW, // TODO: choose an action type.
-				"Main Page", // TODO: Define a title for the content shown.
-				// TODO: If you have web page content that matches this app activity's content,
-				// make sure this auto-generated web page URL is correct.
-				// Otherwise, set the URL to null.
-				Uri.parse("http://host/path"),
-				// TODO: Make sure this auto-generated app deep link URI is correct.
-				Uri.parse("android-app://com.github.paaddyy.jsnandroid/http/host/path")
-		);
-		AppIndex.AppIndexApi.end(client, viewAction);
-		client.disconnect();
 	}
 
 	private void initDiscoveryService()
@@ -324,36 +179,18 @@ public class MainActivity extends Activity implements ARDiscoveryServicesDevices
 
 	@Override
 	public void onServicesDevicesListUpdated() {
-		Log.d(TAG, "onServicesDevicesListUpdated ...");
 
 		if (mArdiscoveryService != null)
 		{
 			deviceList = mArdiscoveryService.getDeviceServicesArray();
 
-			List<String> deviceNames = new ArrayList<String>();
-
 			if(deviceList != null)
 			{
-				for (ARDiscoveryDeviceService service : deviceList)
-				{
-					Log.e(TAG, "service :  "+ service + " name = " + service.getName());
-					ARDISCOVERY_PRODUCT_ENUM product = ARDiscoveryService.getProductFromProductID(service.getProductID());
-					Log.e(TAG, "product :  "+ product);
-					// only display Jumping Sumo
-					if (ARDISCOVERY_PRODUCT_ENUM.ARDISCOVERY_PRODUCT_JS.equals(product))
-					{
-						deviceList.add(service);
-						deviceNames.add(service.getName());
-					}
-				}
+				status.setText("Verbindung bereit!");
+				loadingSpinner.setVisibility(View.GONE);
+				connect.setEnabled(true);
 			}
 
-			deviceNameList = deviceNames.toArray(new String[deviceNames.size()]);
-
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, deviceNameList);
-
-			// Assign adapter to ListView
-			listView.setAdapter(adapter);
 		}
 	}
 }
