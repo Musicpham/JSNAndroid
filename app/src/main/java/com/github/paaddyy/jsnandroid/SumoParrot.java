@@ -115,55 +115,7 @@ public class SumoParrot extends Activity implements ARDeviceControllerListener, 
     }
 
     private void initIHM() {
-        jumHightBt = (Button) findViewById(R.id.jumHightBt);
-        jumHightBt.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        v.setPressed(true);
-                        if (deviceController != null) {
-                            deviceController.getFeatureJumpingSumo().sendAnimationsJump(ARCOMMANDS_JUMPINGSUMO_ANIMATIONS_JUMP_TYPE_ENUM.ARCOMMANDS_JUMPINGSUMO_ANIMATIONS_JUMP_TYPE_HIGH);
-                        }
-                        break;
 
-                    case MotionEvent.ACTION_UP:
-                        v.setPressed(false);
-                        break;
-
-                    default:
-
-                        break;
-                }
-
-                return true;
-            }
-        });
-
-        jumLongBt = (Button) findViewById(R.id.jumLongBt);
-        jumLongBt.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        v.setPressed(true);
-                        if (deviceController != null) {
-                            deviceController.getFeatureJumpingSumo().sendAnimationsJump(ARCOMMANDS_JUMPINGSUMO_ANIMATIONS_JUMP_TYPE_ENUM.ARCOMMANDS_JUMPINGSUMO_ANIMATIONS_JUMP_TYPE_LONG);
-                        }
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        v.setPressed(false);
-                        break;
-
-                    default:
-
-                        break;
-                }
-
-                return true;
-            }
-        });
 
 
         turnRightBt = (Button) findViewById(R.id.turnRightBt);
