@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -56,7 +58,8 @@ import java.util.List;
  */
 public class Start extends Activity{
 
-    private Session session;
+    public Session session;
+    public DatabaseHandler mDBHandler;
 
     public ARDiscoveryDeviceService service;
     public ARDiscoveryDevice device;
@@ -81,6 +84,7 @@ public class Start extends Activity{
         setContentView(R.layout.activity_start);
 
         session = new Session(getApplicationContext());
+        mDBHandler = new DatabaseHandler(getApplicationContext());
 
         if (savedInstanceState == null) {
             //CREATE FIRST FRAGMENT VIEW
@@ -98,6 +102,14 @@ public class Start extends Activity{
         private ServiceConnection mArdiscoveryServiceConnection;
         private List<ARDiscoveryDeviceService> deviceList;
 
+        @Override
+        public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+            if(isVisibleToUser) {
+                Activity a = getActivity();
+                if(a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        }
 
         //CONSTRUCTOR
         public ConnectFragment() {
@@ -225,6 +237,15 @@ public class Start extends Activity{
         private Button status;
         private Button close;
 
+        @Override
+        public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+            if(isVisibleToUser) {
+                Activity a = getActivity();
+                if(a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        }
+
         public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.activity_menu, container, false);
 
@@ -286,6 +307,15 @@ public class Start extends Activity{
 
         DatabaseHandler mDBHandler;
 
+        @Override
+        public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+            if(isVisibleToUser) {
+                Activity a = getActivity();
+                if(a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        }
+
         public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.activity_options, container, false);
 
@@ -343,20 +373,27 @@ public class Start extends Activity{
     public class SummaryFragment extends Fragment {
 
         private TextView name;
-        private DatabaseHandler mDBHandler;
+
         private TextView txtSpace;
         private Button submit;
         private Button new_space;
 
         private String space;
 
+        @Override
+        public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+            if(isVisibleToUser) {
+                Activity a = getActivity();
+                if(a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        }
+
         public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.activity_summary, container, false);
 
             name = (TextView) rootView.findViewById(R.id.name);
             name.setText(product);
-
-            mDBHandler = new DatabaseHandler(getActivity());
 
             space = session.getSpace();
 
@@ -390,7 +427,50 @@ public class Start extends Activity{
     }
 
     public class ManualChoiceFragment extends Fragment{
+        private TextView name;
 
+        private EditText spaceNumberManual;
+        private Button submitManual;
+        private TextView statusManual;
+
+        @Override
+        public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+            if(isVisibleToUser) {
+                Activity a = getActivity();
+                if(a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        }
+
+        public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.activity_manualchoice, container, false);
+
+            name = (TextView) rootView.findViewById(R.id.name);
+            name.setText(product);
+
+            spaceNumberManual = (EditText) rootView.findViewById(R.id.spaceNumberManual);
+            submitManual = (Button) rootView.findViewById(R.id.submitManual);
+            statusManual = (TextView) rootView.findViewById(R.id.statusManual);
+
+            submitManual.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SummaryFragment newFragment = new SummaryFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                    transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+                    // Replace whatever is in the fragment_container view with this fragment,
+                    // and add the transaction to the back stack if needed
+                    transaction.replace(R.id.container, newFragment);
+                    transaction.addToBackStack(null);
+
+                    // Commit the transaction
+                    transaction.commit();
+                }
+            });
+
+            return rootView;
+        }
     }
 
 
