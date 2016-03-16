@@ -195,7 +195,85 @@ public void initializeDatabase(SQLiteDatabase db){
 \end{lstlisting}
 Es ist darauf zu achten, dass die Tabellen in der richtigen Reihenfolge gefüllt
 werden, da sonst die Integritätsbedingungen (Fremdschlüssel) verletzt werden
-könnten und die Operation mit einem Fehler abbrechen würde.
+könnten und die Operation mit einem Fehler abbrechen würde. \\
+
+Nachdem nun Funktionen bestehen, welche die Tabellen erzeugen und mit
+Datenbeständen füllen, werden als nächstes die Funktionen deklariert, welche die
+nötigen Funktionen für das Datenhandling bereitstellen. \\
+Die erste Funktion die wir für unser Projekt benötigen, ist die Suche nach einem
+freien Parkplatz in der Datenbank. Dazu defninieren wir eine Funktion, welche
+mittels einer Select-Query und einem Cursor einen freien Parkplatz zurückgibt.
+SQLite3 verfügt über keinen Datentyp "`boolean"', daher wird, in der Verwaltung
+und Speicherung, der Wahrheitswert "`true"' mit "`1"' assoziert und "`false"'
+mit "`0"' gehandelt.
+\begin{lstlisting}
+public int getFreeSpace(){
+	SQLiteDatabase db = this.getReadableDatabase();
+	int space = 0;
+	
+	String query = "SELECT * FROM PARKING WHERE _FREE = 1 LIMIT 1";
+	Cursor cursor = db.rawQuery(query, null);
+	
+	//GET DATA AND WRITE INTO VALUE
+	if (null != cursor && cursor.moveToFirst()) {
+	    space = Integer.parseInt(cursor.getString(0));
+	}
+	
+	db.close();
+	return space;
+}
+\end{lstlisting}
+Eine weitere Funktion ist das ändern des Zustandes eines Parkplatzes. Wenn ein
+neues Objekt erkannt ist und ihm ein Platz zugewiesen worden ist, muss diese
+Änderung in der Datenbank eingepflegt werden. Wenn man diesen Vorgang fein
+trennen möchte, schreibt man 2 verschiedene Methoden, wobei eine Funktion nur
+für das Sperren des Parkplatzes und die andere für das Freigeben des Parkplatzes
+dienen soll. In unserem Projekt wurde jedoch eine Universalfunktion geschrieben,
+die die Inverse des aktuellen Wahrheitswertes bildet und in die Tabelle updated.
+\begin{lstlisting}
+public int changeStatusOfSpace(String space){
+	SQLiteDatabase db = this.getReadableDatabase();
+	
+	String reverse = "-1";
+	int status = -1;
+	
+	status = getStatusOfSpace(space);
+	
+	if(status == 0){
+		reverse = "1";
+	}else if(status == 1){
+		reverse = "0";
+	}
+	
+	ContentValues cv = new ContentValues();
+	cv.put("_FREE", reverse); 
+	
+	db.update(TB_NAME_PARKING, cv, "SPACE="+space, null);
+	
+	db.close();
+	return Integer.parseInt(reverse);
+}
+\end{lstlisting} 
+Um dennoch einen modularen Funktionsaufbau zu verfolgen, um eine
+einfachere Möglichkeit zur Erweiterung des Programmcodes zu wahren, wird die
+Abfrage des aktuellen Zustands des Parkplatzes in eine eigene Funktion
+ausgelagert.
+\begin{lstlisting}
+public int getStatusOfSpace(String space){
+	int status = -1;
+	SQLiteDatabase db = this.getReadableDatabase();
+	
+	String query = "SELECT _FREE FROM PARKING WHERE SPACE = "+ space + " LIMIT 1";
+	Cursor cursor = db.rawQuery(query, null);
+	
+	//GET DATA AND WRITE INTO VALUE
+	if (null != cursor && cursor.moveToFirst()) {
+	    status = Integer.parseInt(cursor.getString(0));
+	}
+	
+	return status;
+}
+\end{lstlisting}
 
 \end{onehalfspacing}
 \end{document}
