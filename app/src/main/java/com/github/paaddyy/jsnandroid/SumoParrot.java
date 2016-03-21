@@ -37,7 +37,19 @@ import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceNetService;
 import com.parrot.arsdk.ardiscovery.ARDiscoveryDeviceService;
 import com.parrot.arsdk.ardiscovery.ARDiscoveryException;
 
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
+
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by _paaddy_ on 24.02.2016.
@@ -420,6 +432,9 @@ public class SumoParrot extends Activity implements ARDeviceControllerListener, 
         byte[] data = frame.getByteData();
         ByteArrayInputStream ins = new ByteArrayInputStream(data);
         Bitmap bmp = BitmapFactory.decodeStream(ins);
+        bmp = Bitmap.createBitmap(bmp, 160,265,480,200);
+
+        bmp = trackObject(bmp);
 
         FrameDisplay fDisplay = new FrameDisplay(imgView, bmp);
         fDisplay.execute();
@@ -438,5 +453,86 @@ public class SumoParrot extends Activity implements ARDeviceControllerListener, 
         imgView = (ImageView) findViewById(R.id.imageView);
     }
 
+    public Bitmap trackObject(Bitmap bmp){
+        int hueStart = 0;
+        int hueStop = 180;
+
+        int saturationStart = 0;
+        int saturationStop = 255;
+
+        // value for Black Line
+        int valueStart = 0;
+        int valueStop = 100;
+
+        // Parts of Image
+        Mat blurredImage = new Mat();
+        Mat hsvImage = new Mat();
+        Mat mask = new Mat();
+        Mat morphOutput = new Mat();
+        Mat frame = new Mat();
+
+        // Finding Contours
+        List<MatOfPoint> contours = new ArrayList<>();
+        Mat hierarchy = new Mat();
+
+        double largestContour = 0;
+        int largestContourID = 1;
+
+        // convert Bitmap to Mat
+        Utils.bitmapToMat(bmp, frame);
+
+        // remove some noise
+        Imgproc.blur(frame, blurredImage, new Size(7, 7));
+
+        // convert the frame to HSV
+        Imgproc.cvtColor(blurredImage, hsvImage, Imgproc.COLOR_BGR2HSV);
+
+        // get thresholding values for black line
+        Scalar minValues = new Scalar(hueStart, saturationStart, valueStart);
+        Scalar maxValues = new Scalar(hueStop, saturationStop, valueStop);
+
+        // threshold HSV image to select Line
+        Core.inRange(hsvImage, minValues, maxValues, mask);
+
+        // morphological operators
+        // dilate with large element, erode with small ones
+        Mat dilateElement = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(24, 24));
+        Mat erodeElement = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(12, 12));
+
+        Imgproc.erode(mask, morphOutput, erodeElement);
+        Imgproc.erode(mask, morphOutput, erodeElement);
+
+        Imgproc.dilate(mask, morphOutput, dilateElement);
+        Imgproc.dilate(mask, morphOutput, dilateElement);
+
+        // find contours
+        Imgproc.findContours(mask, contours, hierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_SIMPLE);
+
+        // Beginn Test
+        Point centroid = new Point();
+        List<Moments> mu = new ArrayList<Moments>(contours.size());
+        for (int i = 0; i < contours.size(); i++) {
+            mu.add(i, Imgproc.moments(contours.get(i), false));
+            Moments p = mu.get(i);
+
+            if (p.get_m00()> largestContour)
+            {
+                centroid.x = p.get_m10() / p.get_m00();
+                centroid.y = p.get_m01() / p.get_m00();
+
+                largestContour = p.get_m00();
+                largestContourID = i;
+            }
+        }
+
+        // Draw Center of Contour
+        Imgproc.drawMarker(frame,centroid,new Scalar(250, 250, 250));
+
+        // Draw Largest Contour
+        Imgproc.drawContours(frame, contours, largestContourID, new Scalar(250, 250, 250));
+
+        Utils.matToBitmap(frame, bmp);
+        return bmp;
+    }
     //endregion video
 }

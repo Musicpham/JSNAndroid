@@ -66,7 +66,7 @@ public class MatOfPoint extends Mat {
         return ap;
     }
 
-    public void fromList(List<Point> lp) {
+    public void fromList(List<MatOfPoint> lp) {
         Point ap[] = lp.toArray(new Point[0]);
         fromArray(ap);
     }

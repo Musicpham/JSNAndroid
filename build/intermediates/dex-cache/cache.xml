@@ -1,3 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\music\Documents\_Android SDK\android-sdk_r24.4.1-windows\android-sdk-windows\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1_b5c711db749a2bbb2d4be7a8b47679acfce7e459.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARNetworkAL\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f6887e1de8146f194f81bb2e1b6b2a328380adbd">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARNetworkAL-3.8.3_88270342522c23b141d03fb58d6543e4b0df2cf4.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARStream2\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="dbf058e81e107f46ebc58068b9808c160f00c39f">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARStream2-3.8.3_dab79bc19f6cb25c9532fc25346b9c7a9013e099.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\.gradle\caches\modules-2\files-2.1\org.apache.sanselan\sanselan\0.97-incubator\8396778b076a2eaf62024b64f6d924e4e0095fca\sanselan-0.97-incubator.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8396778b076a2eaf62024b64f6d924e4e0095fca">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\sanselan-0.97-incubator_1e73552a4bae93d60a4403f767ac1865de35975d.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\.gradle\caches\modules-2\files-2.1\javax.jmdns\jmdns\3.4.1\7ba2dcf7effb5ca9b00736b2a066fff3dd01d432\jmdns-3.4.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="7ba2dcf7effb5ca9b00736b2a066fff3dd01d432">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\jmdns-3.4.1_668c179cca61eaa0ae0b4d5a962f8f3e2b273fe7.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARDiscovery\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c0c4be91d75353369dd98471694b87f3c0c2cbb8">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARDiscovery-3.8.3_94c363f7aff6d58926615c3c68aeb8a884b6467b.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARMedia\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="50ab33ffcf5b13f0139b4e870c1ba04e6de5a4cc">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARMedia-3.8.3_7330d688ea130a2ee20c12742117e418762e87f9.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.1.0_aba0b5450be262e3d5d668890d918e856538d841.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARUtils\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="2586315fce006f5ecb79e3daebaf75e80704581b">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARUtils-3.8.3_643fb04404354cda4d3e87196eaf985014f7fc20.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1_b3244cb1ee77079edcff603a272bbafd964e2a12.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARUpdater\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fbf2fbeb9a110686abb18e3853f1e747e6b62012">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARUpdater-3.8.3_bb1a03b4ffbfa3643540f66f0bd0528286ed9c05.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARNetwork\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="98871ebd413808da98e818a1e3fecd7bccd1eb4a">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARNetwork-3.8.3_54cc21fb5340f67b9d5bb89259362d980274ccb3.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARDataTransfer\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5fdfbe94903aa9120ca4cdc3699cd2bfc601d6e1">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARDataTransfer-3.8.3_ae230fb8ce17b3c226161d8fa85cf0e1e49ada37.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.1.0_0ace6dc3f70dc033e8d8ffae7776354ee47434fb.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\arsdk\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="641a65fce2b5291e31aeb2a085a827ae4de9d1be">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-arsdk-3.8.3_5a1a9581d06c312e9f4e014217a0196bf2c34e4d.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARSAL\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3b18e25fbfc61f7124d6f756f7d186a28833f12c">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARSAL-3.8.3_58a6f874b5c684476a7ce4e8d5a695b4b34e317d.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARMavlink\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f041c8dcec7819a6268da2b0fc4a5d4507c8b423">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARMavlink-3.8.3_d7c7b0d57e9b221f00a4e2ba74f0d75eff842a05.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARStream\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3cc11def05cef01a52c45b5cbc0b105646406436">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARStream-3.8.3_a6a000f342a4c0df6b8ee092e8f22b1cbfe2ca08.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARCommands\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6571d72e1465926c532c59644b85d30e265a13b5">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARCommands-3.8.3_3cf1f8ebde44e046bb0f0bbb9ba6c8e52c3ad32b.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.1_fc48299497b3f155a39c4b29565e340f7926943a.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.parrot\libARController\3.8.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ea26fd1bcf30dfb9575aeed0384204aeda9485e8">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.parrot-libARController-3.8.3_0b25761d1ee847b6d2f9b337e81e00080a89b66e.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-21.0.3_7c2c817f87a510b6230803bbab593513ee92e6b6.jar" />
+    </item>
+    <item
+        jar="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\exploded-aar\JSNAndroid.libs\opencv\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e9c2313586e88c3f1dbb1a3ea4d02c06b13d4d2e">
+        <dex dex="C:\Users\music\Documents\_JSN\JSNAndroid\JSNAndroid\app\build\intermediates\pre-dexed\debug\JSNAndroid.libs-opencv-unspecified_9dae2b77fa8ff65023fe1fb7ba642190bde7e65c.jar" />
+    </item>
+
+</items>
